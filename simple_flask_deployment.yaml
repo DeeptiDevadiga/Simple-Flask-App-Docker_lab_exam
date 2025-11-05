@@ -1,1 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-flask-app
+  labels:
+    app: simple-flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-flask-app
+  template:
+    metadata:
+      labels:
+        app: simple-flask-app
+    spec:
+      containers:
+      - name: simple-flask-app
+        image: deeptidevadiga/simple-flask:v1   # <-- Change to your image name
+        ports:
+        - containerPort: 5000   # Flask runs on port 5000
 
