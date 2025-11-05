@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    environment {
+        VENV_DIR = "${WORKSPACE}/venv"
+        FLASK_PORT = "5070"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Cloning repository from GitHub..."
+                git url: 'https://github.com/DeeptiDevadiga/Simple-Flask-App-Docker_lab_exam', branch: 'main'
+            }
+        }
+
+        stage('Setup Virtual Environment') {
+            steps {
+                echo "Creating Python virtual environment..."
+                sh """
+                    python3 -m venv $VENV_DIR
+                    source $VENV_DIR/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                """
+            }
+        }
+
+        stage('Stop Previous Flask App') {
+            steps {
+                echo "Stopping any existing Flask app on port $FLASK_PORT..."
+                sh "fuser -k $FLASK_PORT/tcp || true"
+            }
+        }
+
+        stage('Start Flask App') {
+            steps {
+                echo "Starting Flask app..."
+                sh "nohup ${VENV_DIR}/bin/python app.py > flask.log 2>&1 &"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Flask app deployed successfully!"
+            echo "🌍 Access URL: http://<SERVER-IP>:$FLASK_PORT/products"
+        }
+        failure {
+            echo "❌ Deployment failed. Check the logs!"
+        }
+    }
+}
