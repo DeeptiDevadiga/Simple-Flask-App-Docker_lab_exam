@@ -18,5 +18,5 @@ spec:
       - name: simple-flask-app
         image: deeptidevadiga/cafestatic:v3 # deeptidevadiga/simple-flask:v1 
         ports:
-        - containerPort: 5000   # Flask runs on port 5000
+        - containerPort: 5070   # Flask runs on port 5070
 
