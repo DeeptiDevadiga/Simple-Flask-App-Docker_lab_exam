@@ -10,5 +10,4 @@ spec:
     - protocol: TCP
       port: 5070
       targetPort: 5070
-      nodePort: 30009   # Accessible externally on <node-ip>:30009
-
+      nodePort: 30009   
