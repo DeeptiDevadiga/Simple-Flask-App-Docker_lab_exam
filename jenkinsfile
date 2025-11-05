@@ -43,11 +43,11 @@ pipeline {
 
     post {
         success {
-            echo "✅ Flask app deployed successfully!"
-            echo "🌍 Access URL: http://<SERVER-IP>:$FLASK_PORT/products"
+            echo "Flask app deployed successfully!"
+            echo "Access URL: http://<SERVER-IP>:$FLASK_PORT/products"
         }
         failure {
-            echo "❌ Deployment failed. Check the logs!"
+            echo "Deployment failed. Check the logs!"
         }
     }
 }
