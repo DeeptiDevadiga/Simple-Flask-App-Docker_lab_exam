@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: simple-flask-app
-        image: deeptidevadiga/simple_flask:latest
+        image: deeptidevadiga/simple_flask:v9
         ports:
         - containerPort: 5070   
